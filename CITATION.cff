@@ -1,15 +1,16 @@
 cff-version: 1.2.0
 message: "If you use TracePermit, please cite the accompanying manuscript."
-title: "TracePermit: De-identified Contextual Release Benchmark"
+title: "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering (Companion Benchmark)"
 type: dataset
 version: "1.0.0"
 date-released: "2026-08-20"
 repository-code: "https://github.com/6jm233333/TracePermit"
+url: "https://github.com/6jm233333/TracePermit/releases/tag/v1.0.0"
 license: "CC-BY-SA-4.0"
 abstract: >-
-  A de-identified contextual-release benchmark for aviation-engineering language
-  assistance, including frozen controller outcomes, a public study policy, and
-  lightweight verification and result re-aggregation utilities.
+  A de-identified contextual-release benchmark accompanying the manuscript
+  "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering", including frozen controller outcomes, a public study policy,
+  and lightweight verification and result re-aggregation utilities.
 keywords:
   - contextual release control
   - group-isolated evaluation
@@ -31,7 +32,7 @@ authors:
     given-names: "Daoqiang"
 preferred-citation:
   type: article
-  title: "TracePermit: Group-Isolated Evaluation of Contextual Release Decisions for Aviation-Engineering Language Assistance"
+  title: "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering"
   authors:
     - family-names: "Liu"
       given-names: "Jiaming"
