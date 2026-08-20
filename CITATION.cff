@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use TracePermit, please cite the accompanying manuscript."
+title: "TracePermit: De-identified Contextual Release Benchmark"
+version: "1.0.0"
+date-released: "2026-08-20"
+license: "CC-BY-SA-4.0"
+# Fill these two fields after the public GitHub repository and Zenodo record
+# exist. Do not replace them with guessed URLs or a reserved-but-unpublished DOI.
+# repository-code: "https://github.com/<owner>/<repository>"
+# identifiers:
+#   - type: doi
+#     value: "10.5281/zenodo.<record-id>"
+authors:
+  - family-names: "Liu"
+    given-names: "Jiaming"
+  - family-names: "Zhai"
+    given-names: "Fenlou"
+  - family-names: "Zhuang"
+    given-names: "Deyu"
+  - family-names: "Cao"
+    given-names: "Yulin"
+  - family-names: "Ding"
+    given-names: "Cheng"
+  - family-names: "Zhang"
+    given-names: "Daoqiang"
+preferred-citation:
+  type: article
+  title: "TracePermit: Group-Isolated Evaluation of Contextual Release Decisions for Aviation-Engineering Language Assistance"
+  authors:
+    - family-names: "Liu"
+      given-names: "Jiaming"
+    - family-names: "Zhai"
+      given-names: "Fenlou"
+    - family-names: "Zhuang"
+      given-names: "Deyu"
+    - family-names: "Cao"
+      given-names: "Yulin"
+    - family-names: "Ding"
+      given-names: "Cheng"
+    - family-names: "Zhang"
+      given-names: "Daoqiang"

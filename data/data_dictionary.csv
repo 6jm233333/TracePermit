@@ -1,0 +1,13 @@
+field,description,type
+record_id,Public release record identifier; not an upstream source identifier.,string
+split,Frozen benchmark partition.,categorical
+record_type,core or contextual_stress.,categorical
+declared_transformation,nominal for core; development_augmentation for development stress; one of four declared held-out stress families.,categorical
+counterfactual_group_id,Stored pre-transformation grouping unit used for group-level isolation.,string
+parent_counterfactual_group_id,Parent grouping unit retained for transformed-record lineage.,string
+reference_action,"Study reference action: allow, review, or block.",categorical
+request,De-identified request field.,string
+engineering_context,Sanitized engineering context; raw upstream values and source identifiers are omitted.,string
+proxy_cyber_evidence,"Sanitized proxy cyber evidence; raw industrial-control values, timestamps, and native source labels are omitted.",string
+access_scope,Study-defined recipient/access-scope field.,string
+candidate_output,De-identified candidate output considered for release.,string

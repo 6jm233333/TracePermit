@@ -1,0 +1,8 @@
+# Licensing
+
+TracePermit uses two licences:
+
+1. **Software** (`scripts/`): MIT License — see `LICENSES/MIT.txt`.
+2. **Benchmark data, policy specification, metadata, and documentation**: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) — see `LICENSES/CC-BY-SA-4.0.txt`.
+
+The data/documentation licence applies only to rights held by the TracePermit authors. Raw upstream datasets are not distributed here and remain subject to their original terms.

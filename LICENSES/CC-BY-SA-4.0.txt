@@ -1,0 +1,13 @@
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+
+Canonical licence: https://creativecommons.org/licenses/by-sa/4.0/
+Legal code: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+This licence applies to the TracePermit benchmark data, policy specification,
+metadata, and documentation to the extent the TracePermit authors hold the
+applicable rights. Attribution should identify the TracePermit authors and the
+accompanying manuscript. Adapted material must be shared under CC BY-SA 4.0 or
+a BY-SA-compatible licence.
+
+Raw upstream datasets are not included in this repository and are not
+relicensed by TracePermit.

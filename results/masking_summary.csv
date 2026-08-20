@@ -1,0 +1,11 @@
+input_configuration,configuration_id,plot_category,n_traces_per_seed,seeds,macro_f1_mean,macro_f1_sample_sd,u2a_percent_mean,u2a_percent_sample_sd
+Complete trace,complete_trace,complete,320,13;42;2026,0.877,0.024,2.9,1.3
+No access,no_access,single_field_removal,320,13;42;2026,0.864,0.004,3.8,0.4
+No engineering context,no_engineering_context,single_field_removal,320,13;42;2026,0.855,0.005,3.3,0.3
+No cyber evidence,no_cyber_evidence,single_field_removal,320,13;42;2026,0.83,0.006,5.1,0.6
+No engineering context + cyber evidence,no_engineering_context_plus_cyber,restricted_multi_field,320,13;42;2026,0.799,0.009,6.0,0.7
+Request + output,request_plus_output,restricted_multi_field,320,13;42;2026,0.779,0.01,5.5,0.7
+Output only,output_only,restricted_multi_field,320,13;42;2026,0.68,0.014,9.0,1.0
+No output,no_output,single_field_removal,320,13;42;2026,0.402,0.02,16.0,1.5
+No request,no_request,single_field_removal,320,13;42;2026,0.822,0.008,10.8,1.2
+Request only,request_only,restricted_multi_field,320,13;42;2026,0.302,0.023,40.5,2.2
