@@ -8,9 +8,6 @@ TracePermit is the companion research repository for **“TracePermit: Group-Iso
 
 ```text
 TracePermit/
-├── .github/
-│   └── workflows/
-│       └── validate.yml
 ├── data/
 │   ├── tracepermit_benchmark.jsonl
 │   └── data_dictionary.csv
