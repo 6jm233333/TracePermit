@@ -1,57 +1,48 @@
-{
-  "title": "TracePermit: De-identified Contextual Release Benchmark",
-  "version": "1.0.0",
-  "release_date": "2026-08-20",
-  "repository_url": "https://github.com/6jm233333/TracePermit",
-  "doi": null,
-  "archive_status": "github_public_zenodo_pending",
-  "companion_manuscript": "TracePermit: Group-Isolated Evaluation of Contextual Release Decisions for Aviation-Engineering Language Assistance",
-  "record_count": 2072,
-  "core_trace_count": 600,
-  "stress_trace_count": 1472,
-  "core_reference_action_counts": {
-    "allow": 167,
-    "review": 233,
-    "block": 200
-  },
-  "split_counts": {
-    "core_train": 288,
-    "core_validation": 96,
-    "test": 96,
-    "challenge": 120,
-    "development_stress_train": 864,
-    "development_stress_validation": 288,
-    "heldout_known_stress": 320
-  },
-  "heldout_known_stress_family_counts": {
-    "access_scope_flip": 80,
-    "cyber_status_flip": 80,
-    "output_sensitivity_flip": 80,
-    "prompt_injection_insert": 80
-  },
-  "model_families": [
-    "Qwen3-14B",
-    "Phi-4",
-    "OLMo2-13B"
-  ],
-  "seeds": [
-    13,
-    42,
-    2026
-  ],
-  "adaptation_conditions": [
-    "LoRA",
-    "Stress-LoRA"
-  ],
-  "licenses": {
-    "software": "MIT",
-    "data_policy_documentation": "CC-BY-SA-4.0"
-  },
-  "public_trace_fields": [
-    "request",
-    "engineering_context",
-    "proxy_cyber_evidence",
-    "access_scope",
-    "candidate_output"
-  ]
-}
+cff-version: 1.2.0
+message: "If you use TracePermit, please cite the accompanying manuscript."
+title: "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering (Companion Benchmark)"
+type: dataset
+version: "1.0.0"
+date-released: "2026-08-20"
+repository-code: "https://github.com/6jm233333/TracePermit"
+url: "https://github.com/6jm233333/TracePermit/releases/tag/v1.0.0"
+license: "CC-BY-SA-4.0"
+abstract: >-
+  A de-identified contextual-release benchmark accompanying the manuscript
+  "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering", including frozen controller outcomes, a public study policy,
+  and lightweight verification and result re-aggregation utilities.
+keywords:
+  - contextual release control
+  - group-isolated evaluation
+  - aviation engineering
+  - language models
+  - benchmark
+authors:
+  - family-names: "Liu"
+    given-names: "Jiaming"
+  - family-names: "Zhai"
+    given-names: "Fenlou"
+  - family-names: "Zhuang"
+    given-names: "Deyu"
+  - family-names: "Cao"
+    given-names: "Yulin"
+  - family-names: "Ding"
+    given-names: "Cheng"
+  - family-names: "Zhang"
+    given-names: "Daoqiang"
+preferred-citation:
+  type: article
+  title: "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering"
+  authors:
+    - family-names: "Liu"
+      given-names: "Jiaming"
+    - family-names: "Zhai"
+      given-names: "Fenlou"
+    - family-names: "Zhuang"
+      given-names: "Deyu"
+    - family-names: "Cao"
+      given-names: "Yulin"
+    - family-names: "Ding"
+      given-names: "Cheng"
+    - family-names: "Zhang"
+      given-names: "Daoqiang"
