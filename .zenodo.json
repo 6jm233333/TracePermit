@@ -1,7 +1,7 @@
 {
-  "title": "TracePermit: De-identified Contextual Release Benchmark",
+  "title": "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering",
   "upload_type": "dataset",
-  "description": "Version 1.0.0 public release of the de-identified TracePermit benchmark, study policy, frozen controller outcomes, and lightweight verification/re-aggregation code.",
+  "description": "Version 1.0.0 public companion release for the manuscript \"TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering\", including the de-identified benchmark, study policy, frozen controller outcomes, and lightweight verification/re-aggregation code.",
   "version": "1.0.0",
   "access_right": "open",
   "license": "cc-by-sa-4.0",
