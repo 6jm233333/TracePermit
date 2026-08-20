@@ -1,0 +1,37 @@
+{
+  "title": "TracePermit: De-identified Contextual Release Benchmark",
+  "upload_type": "dataset",
+  "description": "Version 1.0.0 public release of the de-identified TracePermit benchmark, study policy, frozen controller outcomes, and lightweight verification/re-aggregation code.",
+  "version": "1.0.0",
+  "access_right": "open",
+  "license": "cc-by-sa-4.0",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Liu, Jiaming"
+    },
+    {
+      "name": "Zhai, Fenlou"
+    },
+    {
+      "name": "Zhuang, Deyu"
+    },
+    {
+      "name": "Cao, Yulin"
+    },
+    {
+      "name": "Ding, Cheng"
+    },
+    {
+      "name": "Zhang, Daoqiang"
+    }
+  ],
+  "keywords": [
+    "contextual release control",
+    "group-isolated evaluation",
+    "aviation engineering",
+    "language models",
+    "benchmark"
+  ],
+  "related_identifiers": []
+}
