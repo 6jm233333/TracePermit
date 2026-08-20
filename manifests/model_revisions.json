@@ -1,0 +1,42 @@
+{
+  "schema": "tracepermit.model-identity.v1",
+  "identity_rule": "The historical run did not retain provider commit IDs. Each private model snapshot is therefore identified by the SHA-256 of its complete content manifest; a later run must additionally record an immutable provider commit in model_hub_revision.",
+  "models": [
+    {
+      "family": "qwen3_14b",
+      "label": "Qwen3-14B",
+      "requested_id": "Qwen/Qwen3-14B",
+      "access_id": "Qwen/Qwen3-14B",
+      "model_revision": "artifact-manifest:f43333ab868637aa68ce57589b9a7012ab81e2f2baa917bcf1c93c08a85a9750",
+      "model_hub_revision": null,
+      "artifact_manifest_sha256": "f43333ab868637aa68ce57589b9a7012ab81e2f2baa917bcf1c93c08a85a9750",
+      "config_sha256": "e73c3664ca09b10a673fef0c22e8a6b456201d49bd4713c9691f775720e8857a",
+      "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "weights_distributed": false
+    },
+    {
+      "family": "phi4",
+      "label": "Phi-4",
+      "requested_id": "microsoft/phi-4",
+      "access_id": "LLM-Research/phi-4",
+      "model_revision": "artifact-manifest:6027ab78a71521f51e6e96a0c80c32dce9064bc948834e139eb0651e3af027cb",
+      "model_hub_revision": null,
+      "artifact_manifest_sha256": "6027ab78a71521f51e6e96a0c80c32dce9064bc948834e139eb0651e3af027cb",
+      "config_sha256": "07eedad2c48798b6e3728e4a1b75e0e092019a375ba725a40e40c78d13664045",
+      "tokenizer_sha256": "9f38d05d9d25756bb2f181ab5a0cebcd59e638df10336fc7ed1010f7296d0298",
+      "weights_distributed": false
+    },
+    {
+      "family": "olmo2_13b",
+      "label": "OLMo2-13B",
+      "requested_id": "allenai/OLMo-2-1124-13B-Instruct",
+      "access_id": "allenai/OLMo-2-1124-13B-Instruct",
+      "model_revision": "artifact-manifest:ea15f221b5b688cf082d8f4a7d2dea46688709f4b94aaace508ae1db321cc503",
+      "model_hub_revision": null,
+      "artifact_manifest_sha256": "ea15f221b5b688cf082d8f4a7d2dea46688709f4b94aaace508ae1db321cc503",
+      "config_sha256": "10b1de896314ca2dbf5aeda0035113dbeaa34e086f2a29bb4944596a15f4861e",
+      "tokenizer_vocab_sha256": "9e14712c91b37c7aab74b1306baa46ac342d620637a4b44523cdc3aec7d24195",
+      "weights_distributed": false
+    }
+  ]
+}

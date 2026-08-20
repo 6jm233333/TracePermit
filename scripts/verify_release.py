@@ -6,21 +6,57 @@ import hashlib
 import json
 import re
 import statistics
+import subprocess
 from collections import Counter
 from pathlib import Path
+import sys
+
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from scripts.record_digest import record_digest
 
 ROOT = Path(__file__).resolve().parents[1]
 ACTIONS = ("allow", "review", "block")
 EXPECTED_VERSION = "1.0.0"
 REQUIRED_PUBLIC_FILES = (
+    "README.md",
+    "metadata.json",
     "CITATION.cff",
     ".zenodo.json",
+    "CHECKSUMS.sha256",
+    "data/tracepermit_benchmark.jsonl",
+    "data/data_dictionary.csv",
+    "outcomes/rule_conservative_outcomes.jsonl",
+    "outcomes/learned_heldout_outcomes.jsonl",
+    "results/masking_summary.csv",
+    "results/validation_summary.csv",
+    "policy/Policy_v1.md",
     "configs/default.json",
+    "requirements-ml.txt",
+    "requirements-ml.lock.txt",
     "prompts/release_decision_v1.txt",
+    "scripts/__init__.py",
     "scripts/train.py",
     "scripts/infer.py",
     "scripts/evaluate.py",
+    "scripts/summarize_results.py",
+    "scripts/record_digest.py",
     "tests/test_release_tools.py",
+    "docs/DATA_CARD.md",
+    "docs/REPRODUCIBILITY.md",
+    "docs/TRAINING_INFERENCE_EVALUATION.md",
+    "docs/MODEL_ACCESS.md",
+    "docs/RELEASE_CHECKLIST.md",
+    "manifests/environment.json",
+    "manifests/model_revisions.json",
+    "manifests/experiment_cells.json",
+    "manifests/provenance.json",
+    "manifests/rights.json",
+    ".github/workflows/validate.yml",
+    "LICENSE",
+    "LICENSES/MIT.txt",
+    "LICENSES/CC-BY-SA-4.0.txt",
 )
 EXPECTED_SPLITS = {
     "core_train": 288,
@@ -51,8 +87,57 @@ def read_csv(path: Path):
 
 
 def sha256(path: Path):
-    data = path.read_bytes().replace(b"\r\n", b"\n")
-    return hashlib.sha256(data).hexdigest()
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def read_checksum_manifest(path: Path):
+    entries = []
+    for line_no, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if "  " not in stripped:
+            fail(f"checksum manifest format: {path}:{line_no}")
+        digest, rel = stripped.split("  ", 1)
+        if not re.fullmatch(r"[0-9a-fA-F]{64}", digest):
+            fail(f"checksum manifest digest: {path}:{line_no}")
+        entries.append((digest.lower(), rel))
+    if not entries:
+        fail("empty CHECKSUMS.sha256")
+    rels = [rel for _, rel in entries]
+    if len(rels) != len(set(rels)):
+        fail("duplicate checksum manifest path")
+    if "CHECKSUMS.sha256" in rels:
+        fail("checksum manifest self-reference")
+    return entries
+
+
+def git_tracked_files():
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    files = {line.strip().replace("\\", "/") for line in result.stdout.splitlines() if line.strip()}
+    files.discard("CHECKSUMS.sha256")
+    return files
+
+
+def verify_jsonl_digests(rows, digest_field: str, label: str):
+    for row in rows:
+        observed = row.get(digest_field)
+        expected = record_digest(row, digest_field)
+        if not isinstance(observed, str) or observed.lower() != expected:
+            fail(f"{label} digest: {row.get('record_id', '<unknown>')}")
 
 
 def macro_f1_and_u2a(rows):
@@ -81,9 +166,40 @@ def main():
     metadata = json.loads((ROOT / "metadata.json").read_text(encoding="utf-8"))
     if metadata.get("version") != EXPECTED_VERSION:
         fail("release version")
+    if metadata.get("repository_url") != "https://github.com/6jm233333/TracePermit":
+        fail("repository url")
+    if metadata.get("release_url") != "https://github.com/6jm233333/TracePermit/releases/tag/v1.0.0":
+        fail("release url")
+    if metadata.get("doi") is not None:
+        fail("zenodo DOI must remain unset until publication")
     zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
     if zenodo.get("version") != EXPECTED_VERSION:
         fail("Zenodo metadata version")
+    environment = json.loads((ROOT / "manifests" / "environment.json").read_text(encoding="utf-8"))
+    if environment.get("schema") != "tracepermit.environment.v1":
+        fail("environment manifest schema")
+    if environment.get("lockfile") != "requirements-ml.lock.txt":
+        fail("environment manifest lockfile")
+    model_revisions = json.loads((ROOT / "manifests" / "model_revisions.json").read_text(encoding="utf-8"))
+    if model_revisions.get("schema") != "tracepermit.model-identity.v1" or len(model_revisions.get("models", [])) != 3:
+        fail("model revision manifest")
+    experiment_cells = json.loads((ROOT / "manifests" / "experiment_cells.json").read_text(encoding="utf-8"))
+    if experiment_cells.get("release_version") != EXPECTED_VERSION or len(experiment_cells.get("cells", [])) != 18:
+        fail("experiment cell manifest")
+    provenance = json.loads((ROOT / "manifests" / "provenance.json").read_text(encoding="utf-8"))
+    if provenance.get("schema") != "tracepermit.provenance.v1":
+        fail("provenance manifest schema")
+    if provenance.get("release_version") != EXPECTED_VERSION:
+        fail("provenance manifest version")
+    if provenance.get("construction_summary", {}).get("total_traces") != 2072:
+        fail("provenance manifest total traces")
+    rights = json.loads((ROOT / "manifests" / "rights.json").read_text(encoding="utf-8"))
+    if rights.get("schema") != "tracepermit.rights.v1":
+        fail("rights manifest schema")
+    if rights.get("release_version") != EXPECTED_VERSION:
+        fail("rights manifest version")
+    if rights.get("software_license") != "MIT":
+        fail("rights manifest software license")
 
     bench = read_jsonl(ROOT / "data" / "tracepermit_benchmark.jsonl")
     if len(bench) != 2072:
@@ -92,6 +208,11 @@ def main():
         fail("duplicate benchmark record_id")
     if Counter(r["split"] for r in bench) != Counter(EXPECTED_SPLITS):
         fail("split counts")
+    verify_jsonl_digests(bench, "record_sha256", "benchmark record")
+
+    data_dictionary = read_csv(ROOT / "data" / "data_dictionary.csv")
+    if not any(row["field"] == "record_sha256" for row in data_dictionary):
+        fail("record_sha256 data dictionary entry")
 
     core = [r for r in bench if r["record_type"] == "core"]
     if len(core) != 600 or Counter(r["reference_action"] for r in core) != EXPECTED_CORE_ACTIONS:
@@ -180,15 +301,21 @@ def main():
         fail("complete-trace masking U2A SD")
 
     checksum_file = ROOT / "CHECKSUMS.sha256"
-    if not checksum_file.is_file():
-        fail("missing checksum manifest: CHECKSUMS.sha256")
-    for line in checksum_file.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        digest, rel = line.split("  ", 1)
+    checksum_entries = read_checksum_manifest(checksum_file)
+    checksum_paths = {rel for _, rel in checksum_entries}
+    for digest, rel in checksum_entries:
         path = ROOT / rel
         if not path.is_file() or sha256(path) != digest:
             fail(f"checksum: {rel}")
+    tracked_files = git_tracked_files()
+    if tracked_files is not None:
+        if checksum_paths != tracked_files:
+            missing = sorted(tracked_files - checksum_paths)
+            extra = sorted(checksum_paths - tracked_files)
+            if missing:
+                fail(f"checksum manifest missing: {missing[0]}")
+            if extra:
+                fail(f"checksum manifest extra: {extra[0]}")
 
     print("PASS: TracePermit v1.0.0 release validation succeeded.")
     print("      2,072 traces | 600 expert-labelled core traces | 536 rule outcomes | 5,760 learned outcomes")

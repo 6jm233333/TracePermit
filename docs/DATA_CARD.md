@@ -10,6 +10,8 @@ Compact engineering context is associated with C-MAPSS, PHM08, and N-CMAPSS; HAI
 
 The public release does not redistribute raw upstream records. It omits raw source values, timestamps, native HAI `Attack` labels, original source identifiers, source filenames, raw source metadata, and trace-to-source mappings.
 
+The machine-readable provenance and rights snapshots are in `manifests/provenance.json` and `manifests/rights.json`.
+
 ## Annotation
 
 All 600 core traces were independently labelled by three qualified aircraft-engine experts under the written study policy. Experts were blinded to model predictions and to one another's initial labels and provided written rationales for `review` and `block` decisions. Majority labels were checked against the written policy; three-way disagreements and safety-critical cases were referred to a senior adjudicator.

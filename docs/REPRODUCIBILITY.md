@@ -10,7 +10,7 @@ python scripts/summarize_results.py
 python -m unittest discover -s tests -v
 ```
 
-The verifier checks record counts, schema, split membership, core-label totals, group-level development/held-out isolation, held-out stress-family counts, de-identification guards, outcome-to-benchmark joins, learned-condition completeness, validation-gate consistency, the complete-trace masking cross-check, and repository checksums.
+The verifier checks record counts, schema, split membership, core-label totals, group-level development/held-out isolation, held-out stress-family counts, per-record benchmark digests, de-identification guards, outcome-to-benchmark joins, learned-condition completeness, validation-gate consistency, the complete-trace masking cross-check, and repository checksums.
 
 ## Re-aggregate reported outcomes
 
@@ -28,9 +28,11 @@ to add paired stored-group bootstrap intervals for the nine within-seed LoRA/Str
 
 ## Experimental environment
 
-The reported experiments used Ubuntu 22.04.5, 10 allocated AMD EPYC 7402 CPU cores, 52.9 GiB memory, one NVIDIA GeForce RTX 4090 GPU, Python 3.10.12, PyTorch 2.5.1+cu124, and CUDA 12.4. The recorded software stack also included Transformers 4.53.3, PEFT 0.13.2, bitsandbytes 0.45.5, Accelerate 1.13.0, Datasets 2.21.0, NumPy 2.2.6, pandas 2.3.3, and scikit-learn 1.7.2.
+The reported experiments used Ubuntu 22.04.5, 10 allocated AMD EPYC 7402 CPU cores, 52.9 GiB memory, one NVIDIA GeForce RTX 4090 GPU, Python 3.10.12, PyTorch 2.5.1+cu124, and CUDA 12.4. The recorded software stack also included Transformers 4.53.3, PEFT 0.13.2, bitsandbytes 0.45.5, Accelerate 1.13.0, Datasets 2.21.0, NumPy 2.2.6, pandas 2.3.3, and scikit-learn 1.7.2. The structured environment snapshot is mirrored in `manifests/environment.json`, and the model and experiment identity snapshots are in `manifests/model_revisions.json` and `manifests/experiment_cells.json`.
 
 Model caches, adapters/checkpoints, raw upstream inputs, and the complete private training runtime are not distributed. The public package supports deterministic re-aggregation of the released outcomes; it does not claim bitwise retraining or inference reproduction.
+
+The repository checksum manifest is `CHECKSUMS.sha256`. It uses SHA-256 over each file's raw bytes and excludes the manifest itself from the listed entries; the benchmark file also carries a per-record `record_sha256` field.
 
 ## Masking and validation summaries
 

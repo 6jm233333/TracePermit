@@ -11,3 +11,4 @@ engineering_context,Sanitized engineering context; raw upstream values and sourc
 proxy_cyber_evidence,"Sanitized proxy cyber evidence; raw industrial-control values, timestamps, and native source labels are omitted.",string
 access_scope,Study-defined recipient/access-scope field.,string
 candidate_output,De-identified candidate output considered for release.,string
+record_sha256,SHA-256 of the canonical record object with this field removed; UTF-8 JSON with sorted keys and compact separators.,hexadecimal string

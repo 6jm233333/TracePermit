@@ -41,6 +41,10 @@ training manifest, and never claims that its output reproduces the private
 camera-ready checkpoints. Adjust model-specific LoRA target modules in the
 config when the selected architecture uses different names.
 
+The public default config records a content-addressed model manifest in
+`model_revision`; set `model_hub_revision` to an immutable provider commit
+before invoking `--run`.
+
 ## Inference
 
 The standard-library demonstration baseline is deterministic and needs no
@@ -56,13 +60,16 @@ path and record the exact model revision in your run notes:
 
 ```bash
 python scripts/infer.py --mode transformers --model-id Qwen/Qwen3-14B \
-  --revision main --split heldout_known_stress \
+  --revision <immutable-provider-commit> --split heldout_known_stress \
   --output artifacts/qwen3_predictions.jsonl
 ```
 
 The heuristic is a runnable demonstration only; it is not the manuscript's
 frozen Rule-Conservative result. A generated action that cannot be parsed is
 mapped to `review` as a conservative parsing fallback.
+
+The Transformers path rejects placeholder revisions such as the release
+config's content-manifest token; `--revision` must be an actual provider commit.
 
 ## Evaluation
 

@@ -33,6 +33,14 @@ def read_jsonl(path: Path):
         return [json.loads(line) for line in handle if line.strip()]
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def render_prompt(template: str, row: dict) -> str:
     return template.format(
         request=row["request"],
@@ -44,14 +52,20 @@ def render_prompt(template: str, row: dict) -> str:
 
 
 def build_manifest(config: dict) -> dict:
-    data = read_jsonl(resolve_path(config["data_path"]))
+    data_path = resolve_path(config["data_path"])
+    data = read_jsonl(data_path)
     train = [row for row in data if row["split"] == config["train_split"]]
     validation = [row for row in data if row["split"] == config["validation_split"]]
     prompt = resolve_path(config["prompt_path"]).read_text(encoding="utf-8")
     return {
         "version": config["version"],
         "model_id": config["model_id"],
-        "model_revision": config.get("model_revision", "main"),
+        "model_revision": config.get("model_revision"),
+        "model_hub_revision": config.get("model_hub_revision"),
+        "model_artifact_manifest_sha256": config.get("model_artifact_manifest_sha256"),
+        "model_manifest_path": config.get("model_manifest_path"),
+        "environment_manifest_path": config.get("environment_manifest_path"),
+        "experiment_cell_manifest_path": config.get("experiment_cell_manifest_path"),
         "train_split": config["train_split"],
         "validation_split": config["validation_split"],
         "train_records": len(train),
@@ -66,10 +80,18 @@ def build_manifest(config: dict) -> dict:
         "lora_alpha": config["lora_alpha"],
         "lora_dropout": config["lora_dropout"],
         "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
+        "data_sha256": sha256_file(data_path),
     }
 
 
 def run_training(config: dict, output_dir: Path) -> None:
+    hub_revision = config.get("model_hub_revision")
+    if not hub_revision:
+        raise SystemExit(
+            "The release config records a content-addressed private model manifest, "
+            "not a provider checkout revision. Supply an immutable provider commit "
+            "in model_hub_revision before using --run."
+        )
     try:
         import torch
         from datasets import Dataset
@@ -90,14 +112,14 @@ def run_training(config: dict, output_dir: Path) -> None:
 
     tokenizer = AutoTokenizer.from_pretrained(
         config["model_id"],
-        revision=config.get("model_revision", "main"),
+        revision=hub_revision,
         trust_remote_code=config.get("trust_remote_code", False),
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(
         config["model_id"],
-        revision=config.get("model_revision", "main"),
+        revision=hub_revision,
         trust_remote_code=config.get("trust_remote_code", False),
     )
     lora = LoraConfig(

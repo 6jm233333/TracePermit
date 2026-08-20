@@ -1,0 +1,28 @@
+{
+  "schema": "tracepermit.environment.v1",
+  "environment_id": "tracepermit-eaai-2026-08-protocol",
+  "os": "Ubuntu 22.04.5 LTS",
+  "cpu": "10 allocated AMD EPYC 7402 CPU cores",
+  "memory_gib": 52.9,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "gpu_memory_mib": 24564,
+  "driver": "595.58.03",
+  "cuda_runtime": "12.4",
+  "python": "3.10.12",
+  "packages": {
+    "torch": "2.5.1+cu124",
+    "transformers": "4.53.3",
+    "peft": "0.13.2",
+    "bitsandbytes": "0.45.5",
+    "accelerate": "1.13.0",
+    "datasets": "2.21.0",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.21.4"
+  },
+  "lockfile": "requirements-ml.lock.txt",
+  "hardware_note": "Driver-reported CUDA compatibility and the PyTorch CUDA build are recorded separately.",
+  "reproduction_boundary": "This manifest describes the reported execution environment; model caches, adapters, raw inputs, and private runtime artifacts are not redistributed."
+}

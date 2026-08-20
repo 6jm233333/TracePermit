@@ -1,0 +1,15 @@
+# TracePermit v1.0.0 execution lock (Ubuntu 22.04.5; Python 3.10.12)
+# CUDA build/runtime is recorded separately in manifests/environment.json.
+# The model weights, private adapters, and provider-side model snapshots are
+# intentionally not included in this public lock.
+accelerate==1.13.0
+bitsandbytes==0.45.5
+datasets==2.21.0
+numpy==2.2.6
+pandas==2.3.3
+peft==0.13.2
+safetensors==0.8.0
+scikit-learn==1.7.2
+tokenizers==0.21.4
+torch==2.5.1+cu124
+transformers==4.53.3

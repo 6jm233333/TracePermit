@@ -42,6 +42,11 @@ def heuristic_action(row: dict) -> str:
 
 
 def transformer_actions(rows, template: str, model_id: str, revision: str, trust_remote_code: bool, max_new_tokens: int):
+    if not revision or revision.startswith("artifact-manifest:"):
+        raise SystemExit(
+            "Transformer inference requires an immutable provider commit in --revision. "
+            "The release default is a private content manifest and cannot be passed to a model hub."
+        )
     try:
         from transformers import pipeline
     except ImportError as exc:
@@ -72,7 +77,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=ROOT / "artifacts" / "predictions.jsonl")
     parser.add_argument("--mode", choices=("heuristic", "transformers"), default="heuristic")
     parser.add_argument("--model-id", default="Qwen/Qwen3-14B")
-    parser.add_argument("--revision", default="main")
+    parser.add_argument("--revision", default=None)
     parser.add_argument("--trust-remote-code", action="store_true")
     parser.add_argument("--prompt", type=Path, default=ROOT / "prompts" / "release_decision_v1.txt")
     parser.add_argument("--limit", type=int)

@@ -1,0 +1,88 @@
+{
+  "schema": "tracepermit.provenance.v1",
+  "release_version": "1.0.0",
+  "benchmark_role": "Derived de-identified contextual-release benchmark",
+  "construction_summary": {
+    "core_traces": 600,
+    "development_stress_traces": 1152,
+    "heldout_known_stress_traces": 320,
+    "total_traces": 2072,
+    "stored_grouping_units": 200
+  },
+  "source_family_flow": [
+    {
+      "family": "C-MAPSS",
+      "stored_grouping_units": 25,
+      "core_traces": 75,
+      "role": "Compact engineering context; not native action labels",
+      "upstream_task": "Synthetic turbofan remaining-useful-life prognostics",
+      "native_release_action": false,
+      "version_release": "NASA PCoE 2008 record; no semantic release stated",
+      "canonical_reference": "Saxena et al. (2008)",
+      "official_source": "NASA Ames PCoE Data Set Repository"
+    },
+    {
+      "family": "PHM08",
+      "stored_grouping_units": 53,
+      "core_traces": 159,
+      "role": "Compact engineering context; not native action labels",
+      "upstream_task": "Synthetic turbofan remaining-useful-life challenge",
+      "native_release_action": false,
+      "version_release": "NASA PCoE 2008 record; direct download unavailable",
+      "canonical_reference": "Saxena et al. (2008)",
+      "official_source": "NASA Ames PCoE Data Set Repository"
+    },
+    {
+      "family": "N-CMAPSS",
+      "stored_grouping_units": 58,
+      "core_traces": 174,
+      "role": "Compact engineering context; not native action labels",
+      "upstream_task": "Synthetic-flight engine prognostics and diagnostics",
+      "native_release_action": false,
+      "version_release": "2021 data descriptor; no immutable archive release",
+      "canonical_reference": "Arias Chao et al. (2021)",
+      "official_source": "NASA Ames PCoE Data Set Repository"
+    },
+    {
+      "family": "Derived contextual category",
+      "stored_grouping_units": 64,
+      "core_traces": 192,
+      "role": "Study-derived context combined with HAI",
+      "upstream_task": "Not an upstream dataset",
+      "native_release_action": false,
+      "version_release": "Study-defined category",
+      "canonical_reference": "This study",
+      "official_source": "Not applicable"
+    }
+  ],
+  "stress_construction": {
+    "development_contextual_stress_traces": 1152,
+    "heldout_known_stress_traces": 320,
+    "heldout_known_stress_families": {
+      "access_scope_flip": 80,
+      "cyber_status_flip": 80,
+      "output_sensitivity_flip": 80,
+      "prompt_injection_insert": 80
+    },
+    "group_isolation_level": "counterfactual_group_id and parent_counterfactual_group_id",
+    "raw_source_identifiers_retained": false,
+    "trace_to_source_map_retained": false
+  },
+  "upstream_context_sources": [
+    {
+      "dataset": "HAI 22.04",
+      "role": "Proxy industrial-control cyber evidence",
+      "native_field": "Attack",
+      "version_release": "Date-based HAI 22.04 release (2022)",
+      "canonical_reference": "HAI 22.04 repository; Shin et al. (2021) for dataset lineage",
+      "official_source": "Official icsdataset/hai repository",
+      "redistributed": false
+    }
+  ],
+  "release_boundaries": [
+    "Raw source records are not redistributed.",
+    "Source identifiers, source filenames, raw source metadata, timestamps, and trace-to-source links are not redistributed.",
+    "The derived contextual category is a study artifact rather than an independent upstream dataset.",
+    "The stored grouping-unit isolation claim is limited to release-specific grouping identifiers."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "tracepermit.rights.v1",
+  "release_version": "1.0.0",
+  "software_license": "MIT",
+  "benchmark_license": "CC BY-SA 4.0",
+  "documentation_license": "CC BY-SA 4.0",
+  "public_release_components": [
+    "de-identified benchmark",
+    "study policy",
+    "frozen controller outcomes",
+    "verification and re-aggregation code",
+    "release metadata and manifests"
+  ],
+  "excluded_from_public_release": [
+    "raw upstream datasets",
+    "raw source identifiers",
+    "source filenames",
+    "timestamps",
+    "trace-to-source maps",
+    "private checkpoints",
+    "model caches",
+    "individual expert rationales",
+    "adjudication histories"
+  ],
+  "upstream_terms": [
+    {
+      "dataset": "C-MAPSS",
+      "redistributed": false,
+      "rights_note": "Upstream terms remain with the original NASA Ames PCoE source."
+    },
+    {
+      "dataset": "PHM08",
+      "redistributed": false,
+      "rights_note": "Upstream terms remain with the original NASA Ames PCoE source."
+    },
+    {
+      "dataset": "N-CMAPSS",
+      "redistributed": false,
+      "rights_note": "Upstream terms remain with the original NASA Ames PCoE source."
+    },
+    {
+      "dataset": "HAI 22.04",
+      "redistributed": false,
+      "rights_note": "Upstream terms remain with the official icsdataset/hai repository and dataset lineage."
+    },
+    {
+      "dataset": "Derived contextual category",
+      "redistributed": false,
+      "rights_note": "Study artifact only; no separate upstream license applies."
+    }
+  ]
+}
