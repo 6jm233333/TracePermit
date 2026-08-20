@@ -5,7 +5,7 @@
   "repository_url": "https://github.com/6jm233333/TracePermit",
   "release_url": "https://github.com/6jm233333/TracePermit/releases/tag/v1.0.0",
   "doi": null,
-  "archive_status": "github_release_published_zenodo_pending",
+  "archive_status": "release_pending",
   "companion_manuscript": "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering",
   "record_count": 2072,
   "core_trace_count": 600,

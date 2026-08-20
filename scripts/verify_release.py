@@ -51,11 +51,8 @@ def read_csv(path: Path):
 
 
 def sha256(path: Path):
-    h = hashlib.sha256()
-    with path.open("rb") as f:
-        for chunk in iter(lambda: f.read(1024 * 1024), b""):
-            h.update(chunk)
-    return h.hexdigest()
+    data = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def macro_f1_and_u2a(rows):
@@ -183,14 +180,15 @@ def main():
         fail("complete-trace masking U2A SD")
 
     checksum_file = ROOT / "CHECKSUMS.sha256"
-    if checksum_file.exists():
-        for line in checksum_file.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            digest, rel = line.split("  ", 1)
-            path = ROOT / rel
-            if not path.is_file() or sha256(path) != digest:
-                fail(f"checksum: {rel}")
+    if not checksum_file.is_file():
+        fail("missing checksum manifest: CHECKSUMS.sha256")
+    for line in checksum_file.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        digest, rel = line.split("  ", 1)
+        path = ROOT / rel
+        if not path.is_file() or sha256(path) != digest:
+            fail(f"checksum: {rel}")
 
     print("PASS: TracePermit v1.0.0 release validation succeeded.")
     print("      2,072 traces | 600 expert-labelled core traces | 536 rule outcomes | 5,760 learned outcomes")

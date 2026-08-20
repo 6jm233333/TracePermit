@@ -3,7 +3,7 @@
   "data_path": "data/tracepermit_benchmark.jsonl",
   "prompt_path": "prompts/release_decision_v1.txt",
   "model_id": "Qwen/Qwen3-14B",
-  "model_revision": "main",
+  "model_revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
   "trust_remote_code": false,
   "train_split": "core_train",
   "validation_split": "core_validation",

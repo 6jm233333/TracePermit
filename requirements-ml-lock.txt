@@ -1,0 +1,11 @@
+# TracePermit pinned training environment (Supplementary Protocol §1.8).
+# Install: pip install --extra-index-url https://download.pytorch.org/whl/cu124 -r requirements-ml-lock.txt
+torch==2.5.1+cu124
+transformers==4.53.3
+peft==0.13.2
+bitsandbytes==0.45.5
+accelerate==1.13.0
+datasets==2.21.0
+numpy==2.2.6
+pandas==2.3.3
+scikit-learn==1.7.2
