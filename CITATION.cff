@@ -1,15 +1,21 @@
 cff-version: 1.2.0
 message: "If you use TracePermit, please cite the accompanying manuscript."
 title: "TracePermit: De-identified Contextual Release Benchmark"
+type: dataset
 version: "1.0.0"
 date-released: "2026-08-20"
+repository-code: "https://github.com/6jm233333/TracePermit"
 license: "CC-BY-SA-4.0"
-# Fill these two fields after the public GitHub repository and Zenodo record
-# exist. Do not replace them with guessed URLs or a reserved-but-unpublished DOI.
-# repository-code: "https://github.com/<owner>/<repository>"
-# identifiers:
-#   - type: doi
-#     value: "10.5281/zenodo.<record-id>"
+abstract: >-
+  A de-identified contextual-release benchmark for aviation-engineering language
+  assistance, including frozen controller outcomes, a public study policy, and
+  lightweight verification and result re-aggregation utilities.
+keywords:
+  - contextual release control
+  - group-isolated evaluation
+  - aviation engineering
+  - language models
+  - benchmark
 authors:
   - family-names: "Liu"
     given-names: "Jiaming"
