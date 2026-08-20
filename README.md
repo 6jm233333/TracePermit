@@ -1,8 +1,6 @@
 # TracePermit v1.0.0
 
-TracePermit is the companion research repository for **“TracePermit: Group-Isolated Evaluation of Contextual Release Decisions for Aviation-Engineering Language Assistance.”** It provides a de-identified contextual-release benchmark, frozen controller outcomes, the public study policy, and lightweight verification/re-aggregation code.
-
-
+TracePermit is the companion research repository for **“TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering.”** It provides a de-identified contextual-release benchmark, frozen controller outcomes, the public study policy, and lightweight verification/re-aggregation code.
 
 ## Repository contents
 
