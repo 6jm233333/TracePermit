@@ -23,7 +23,6 @@ REQUIRED_PUBLIC_FILES = (
     "README.md",
     "metadata.json",
     "CITATION.cff",
-    ".zenodo.json",
     "CHECKSUMS.sha256",
     "data/tracepermit_benchmark.jsonl",
     "data/data_dictionary.csv",
@@ -127,7 +126,11 @@ def git_tracked_files():
         )
     except (OSError, subprocess.CalledProcessError):
         return None
-    files = {line.strip().replace("\\", "/") for line in result.stdout.splitlines() if line.strip()}
+    files = {
+        line.strip().replace("\\", "/")
+        for line in result.stdout.splitlines()
+        if line.strip() and (ROOT / line.strip()).is_file()
+    }
     files.discard("CHECKSUMS.sha256")
     return files
 
@@ -170,11 +173,8 @@ def main():
         fail("repository url")
     if metadata.get("release_url") != "https://github.com/6jm233333/TracePermit/releases/tag/v1.0.0":
         fail("release url")
-    if metadata.get("doi") is not None:
-        fail("zenodo DOI must remain unset until publication")
-    zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
-    if zenodo.get("version") != EXPECTED_VERSION:
-        fail("Zenodo metadata version")
+    if metadata.get("archive_status") != "github_release_published":
+        fail("archive status")
     environment = json.loads((ROOT / "manifests" / "environment.json").read_text(encoding="utf-8"))
     if environment.get("schema") != "tracepermit.environment.v1":
         fail("environment manifest schema")

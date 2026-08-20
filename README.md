@@ -43,7 +43,6 @@ TracePermit/
 |   |-- provenance.json
 |   `-- rights.json
 |-- CITATION.cff
-|-- .zenodo.json
 |-- .github/workflows/validate.yml
 |-- CHECKSUMS.sha256
 |-- requirements-ml.txt
@@ -98,7 +97,7 @@ TracePermit evaluates a study-defined contextual release decision (`allow`, `rev
 
 ## Citation
 
-If you use this repository, please cite the accompanying manuscript. Machine-readable citation metadata are provided in `CITATION.cff`. The public repository URL is fixed in the release metadata; the persistent Zenodo DOI will be added after the v1.0.0 archive is published.
+If you use this repository, please cite the accompanying manuscript. Machine-readable citation metadata are provided in `CITATION.cff`. The public repository URL is fixed in the release metadata, and the GitHub tag `v1.0.0` is the frozen release point.
 
 ## License
 
