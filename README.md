@@ -35,6 +35,7 @@ TracePermit/
 |   |-- REPRODUCIBILITY.md
 |   |-- TRAINING_INFERENCE_EVALUATION.md
 |   |-- MODEL_ACCESS.md
+|   |-- MANUSCRIPT_ALIGNMENT.md
 |   `-- RELEASE_CHECKLIST.md
 |-- manifests/
 |   |-- environment.json
@@ -87,6 +88,10 @@ The public traces are sanitized research artifacts. They omit raw upstream value
 
 The benchmark file itself carries a per-record `record_sha256` digest, and `CHECKSUMS.sha256` records file-level hashes for the released tree.
 
+The mapping between manuscript tables, supplementary numerical results, and
+the public verification files is documented in
+[`docs/MANUSCRIPT_ALIGNMENT.md`](docs/MANUSCRIPT_ALIGNMENT.md).
+
 ## Reproducibility boundary
 
 This public release is designed to support independent inspection of the benchmark, verification of frozen partitions and group isolation, validation of released artifacts, and re-aggregation of the reported controller-level outcomes. It does not claim bitwise reproduction of the private training or inference runtime, and it does not redistribute private checkpoints, model caches, or raw upstream inputs.
@@ -98,6 +103,10 @@ TracePermit evaluates a study-defined contextual release decision (`allow`, `rev
 ## Citation
 
 If you use this repository, please cite the accompanying manuscript. Machine-readable citation metadata are provided in `CITATION.cff`. The public repository URL is fixed in the release metadata, and the GitHub tag `v1.0.0` is the frozen release point.
+
+Journal-formatted manuscript and supplementary submission files are maintained
+outside the release tree. This keeps the repository focused on the compact
+benchmark, frozen outcomes, policy, and verification code.
 
 ## License
 

@@ -19,7 +19,14 @@ from scripts.record_digest import record_digest
 ROOT = Path(__file__).resolve().parents[1]
 ACTIONS = ("allow", "review", "block")
 EXPECTED_VERSION = "1.0.0"
+EXPECTED_MANUSCRIPT_TITLE = (
+    "TracePermit: Context-Complete Release Control for LLM Assistance in "
+    "Safety-Critical Engineering"
+)
+EXPECTED_ARTIFACT_TITLE = f"{EXPECTED_MANUSCRIPT_TITLE} (Companion Benchmark)"
 REQUIRED_PUBLIC_FILES = (
+    ".gitignore",
+    ".zenodo.json",
     "README.md",
     "metadata.json",
     "CITATION.cff",
@@ -46,6 +53,7 @@ REQUIRED_PUBLIC_FILES = (
     "docs/REPRODUCIBILITY.md",
     "docs/TRAINING_INFERENCE_EVALUATION.md",
     "docs/MODEL_ACCESS.md",
+    "docs/MANUSCRIPT_ALIGNMENT.md",
     "docs/RELEASE_CHECKLIST.md",
     "manifests/environment.json",
     "manifests/model_revisions.json",
@@ -169,6 +177,16 @@ def main():
     metadata = json.loads((ROOT / "metadata.json").read_text(encoding="utf-8"))
     if metadata.get("version") != EXPECTED_VERSION:
         fail("release version")
+    if metadata.get("title") != EXPECTED_ARTIFACT_TITLE:
+        fail("metadata artifact title")
+    if metadata.get("companion_manuscript") != EXPECTED_MANUSCRIPT_TITLE:
+        fail("metadata manuscript title")
+    zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
+    if zenodo.get("title") != EXPECTED_ARTIFACT_TITLE:
+        fail("Zenodo artifact title")
+    for relative in ("README.md", "CITATION.cff"):
+        if EXPECTED_MANUSCRIPT_TITLE not in (ROOT / relative).read_text(encoding="utf-8"):
+            fail(f"manuscript title: {relative}")
     if metadata.get("repository_url") != "https://github.com/6jm233333/TracePermit":
         fail("repository url")
     if metadata.get("release_url") != "https://github.com/6jm233333/TracePermit/releases/tag/v1.0.0":

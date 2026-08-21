@@ -1,5 +1,5 @@
 {
-  "title": "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering",
+  "title": "TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering (Companion Benchmark)",
   "upload_type": "dataset",
   "description": "Version 1.0.0 public companion release for the manuscript \"TracePermit: Context-Complete Release Control for LLM Assistance in Safety-Critical Engineering\", including the de-identified benchmark, study policy, frozen controller outcomes, and lightweight verification/re-aggregation code.",
   "version": "1.0.0",
